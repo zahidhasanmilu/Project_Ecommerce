@@ -65,9 +65,9 @@ def card_increment(request, pk):
         # Check if the order item is in the order
         if order.orderitems.filter(item=item).exists():
             if not created:  # If the item was not just created
-                order_item.quantity += 1
+                order_item.quantity += 2
                 order_item.save()
-                messages.info(request, 'This product quantity updated')
+                messages.success(request, 'This product quantity updated')
                 return redirect('cart_view')
 
     # If the order does not exist or the product is not in the order

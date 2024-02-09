@@ -8,6 +8,7 @@ from django.conf import settings
 ##
 from App_account.models import User
 from App_shop.models import Product
+from App_payment.models import Checkout
 
 
 class Cart(models.Model):
@@ -43,6 +44,13 @@ class Order(models.Model):
     ordered = models.BooleanField(default=False)
     payment_id = models.CharField(max_length=255, blank=True, null=True)
     order_id = models.CharField(max_length=255, blank=True, null=True)
+    shipping_address = models.ForeignKey(Checkout, on_delete=models.CASCADE, blank=True, null=True)
+    PAYMENT_METHOD = (
+        ('Cash On Delivery', 'Cash On Delivery'),
+        ('SSL Commerz', 'SSL Commerz'),
+    )
+    payment_option = models.CharField(choices =PAYMENT_METHOD,max_length=100, blank=True, null=True,)
+    
     created = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(auto_now=True)
 

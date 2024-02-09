@@ -47,6 +47,7 @@ CUSTOME_APPS=[
     'App_account',
     'App_shop',
     'App_order',
+    'App_payment'
 ]
 INSTALLED_APPS=INSTALLED_APPS+CUSTOME_APPS
 
