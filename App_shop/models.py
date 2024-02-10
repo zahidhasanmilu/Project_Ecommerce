@@ -26,7 +26,7 @@ class Category(models.Model):
         ordering = ['-created',]
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
-        
+
     def save(self, *args, **kwargs):
         # Generate slug using the product name
         if not self.slug:
@@ -47,13 +47,13 @@ class Product(models.Model):
     old_price = models.FloatField(default=0.00, blank=True, null=True)
     is_stock = models.BooleanField(default=True,)
     created = models.DateTimeField(auto_now_add=True)
-    
+
     def save(self, *args, **kwargs):
         # Generate slug using the product name
         if not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
-        
+
     def __str__(self):
         return self.name
 
@@ -62,18 +62,17 @@ class Product(models.Model):
         managed = True
         verbose_name = 'Product'
         verbose_name_plural = 'Products'
-        
+
     def get_product_url(self):
-        
+
         return reverse('product_details', kwargs={'slug': self.slug})
-    
-    
+
+
 class ProductImage(models.Model):
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
     image = models.ImageField(upload_to="Product_gellary")
     created = models.DateTimeField(auto_now_add=True)
-    
-    
+
     def __str__(self):
         return str(self.product.name)
 

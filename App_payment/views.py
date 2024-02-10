@@ -14,6 +14,7 @@ from django.contrib.auth.forms import AuthenticationForm
 
 # models
 from App_account.models import User, Profile
+from App_order.models import Order
 
 # forms
 from App_account.forms import SignUpForm
@@ -31,10 +32,13 @@ class CheckoutView(View):
     def get(self, request, *args, **kwargs):
         form = BillingAddressForm()
         payment_method = PaymentMethodForm()
+        order = Order.objects.get(user = request.user, ordered=False)
+        
         
         context = {
             'form':form,
-            'payment_method':payment_method
+            'payment_method':payment_method,
+            'order':order
         }
         return render(request, 'app_payment/checkout.html',context)
 

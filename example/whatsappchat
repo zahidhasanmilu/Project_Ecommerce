@@ -1,0 +1,5 @@
+<!-- Whatsapp chat -->
+    <a href="https://wa.me/+8801859974852?text=I'm%20interested%20in%20chat%20about%20your%20products" target="_blank" class="whatsapp_chat">
+        <img src="{% static 'assets/images/whatsapp_logo/whatsapp_logo.png' %}"  alt="Chat on WhatsApp" width="40px">
+       
+    </a>

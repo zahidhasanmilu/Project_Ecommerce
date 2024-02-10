@@ -4,6 +4,25 @@
 {{item.name}}  
 {% endblock title %}
 
+<!-- head script -->
+{% block head %}
+
+<meta property="og:url"           content="http://127.0.0.1:8000/product/details/{{item.slug}}"/>
+<meta property="og:type"          content="website"/>
+<meta property="og:title"         content="{{item.name}}" />
+<meta property="og:description"   content="{{item.full_description|striptags}}" />
+<meta property="og:image"         content="{{item.image.url}}" />
+
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-flat.css" />
+
+ <!--social share-->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+{% endblock head %}
+
+
 {% block content %}
 <main class="main">
     <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
@@ -122,6 +141,11 @@
                                     <a href="#" class="btn-product btn-compare" title="Compare"><span>Add to Compare</span></a>
                                 </div><!-- End .details-action-wrapper -->
                             </div><!-- End .product-details-action -->
+
+
+                            <div class="py-4 mt-3">
+                                <div id="shareButtonLabel"></div>
+                            </div>
 
                             <div class="product-details-footer">
                                 <div class="product-cat">
@@ -335,6 +359,29 @@
         </div><!-- End .container -->
     </div><!-- End .page-content -->
 </main><!-- End .main -->
+
+
+
+{% block script %}
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
+<script>
+  $("#shareButtonLabel").jsSocials({
+      url: "http://127.0.0.1:8000/product/details/{{item.slug}}",
+      showCount: false,
+      showLabel: true,
+      shares: [
+          "twitter",
+          "email",
+          { share: "facebook", label: "Facebook" },
+          { share: "linkedin", label: "LinkedIn" },
+          { share: "pinterest", label: "Pinterest" },
+          "whatsapp"
+      ]
+  });
+
+</script>
+{% endblock script %}
+
 
 {% endblock content %}
         
