@@ -1,8 +1,8 @@
 from django import forms
 from App_order.models import Order
 
-class BillingAddressForm(forms.Form):
-    """BillingAddressForm definition."""
+class CheckoutForm(forms.Form):
+    """CheckoutForm definition."""
 
     name = forms.CharField(label="", widget=forms.TextInput(
         attrs={

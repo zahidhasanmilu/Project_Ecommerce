@@ -20,8 +20,8 @@ def cart_count(request):
         cart_count = cart_item.count()
     else:
         cart_count = 0
-        cart_item = None
-        order = None
+        cart_item = 0
+        order = 0
 
     context = {'cart_count': cart_count, 'cart_item': cart_item, 'order': order}
     return context

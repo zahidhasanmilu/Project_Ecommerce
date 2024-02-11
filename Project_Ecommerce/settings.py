@@ -160,3 +160,7 @@ EMAIL_PORT = 587  # or the port your SMTP server requires
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'minions.milu889@gmail.com'
 EMAIL_HOST_PASSWORD = 'hoei sqok hlhm mpmm'
+
+
+STORE_ID = 'cleve6084e47685c74'
+STORE_PASS = 'cleve6084e47685c74@ssl'

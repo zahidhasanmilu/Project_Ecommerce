@@ -37,15 +37,13 @@ Checkout
                                 enter your code</span></label>
                     </form>
                 </div><!-- End .checkout-discount -->
-                <form action="#">
+                <form action="{% url 'checkout' %}" method="post">
                     <div class="row">
                         <div class="col-lg-9">
-                            <h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
-                            <form action="" method="post">
+                            <h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->                            
                                 {% csrf_token %}
                                 {{form}}
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
+            
                         </div><!-- End .col-lg-9 -->
                         <aside class="col-lg-3">
                             <div class="summary">
@@ -104,11 +102,11 @@ Checkout
 
                                   
                                 </div><!-- End .accordion -->
-
-                                <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
+ <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
                                     <span class="btn-text">Place Order</span>
                                     <span class="btn-hover-text">Proceed to Checkout</span>
                                 </button>
+ 
                             </div><!-- End .summary -->
                         </aside><!-- End .col-lg-3 -->
                     </div><!-- End .row -->
