@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'sslcommerz_python',
+    
     'django_cleanup.apps.CleanupConfig',
     'django.contrib.admin',
     'django.contrib.auth',

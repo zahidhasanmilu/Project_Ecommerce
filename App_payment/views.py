@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404, redirect, HttpResponse
 from django.urls import reverse, reverse_lazy
 
@@ -28,8 +29,9 @@ import uuid
 from django.db.models import Q
 
 #for SSL COMMERZ
-# from sslcommerz_python.payment import SSLCSession
-# from decimal import Decimal
+from decimal import Decimal
+from sslcommerz_python.payment import SSLCSession
+
 
 # Create your views here.
 
@@ -143,7 +145,36 @@ class CheckoutView(View):
                 return redirect('home')
             elif payment_method == 'SSL Commerz':
                 # Handle other payment methods (not implemented in this example)
-                pass
+                store_id = settings.STORE_ID
+                store_pass = settings.STORE_PASS
+                
+                mypayment = SSLCSession(
+                    sslc_is_sandbox=True,
+                    sslc_store_id=store_id,
+                    slc_store_pass=store_pass
+                    )
+                ###########--------------------#############
+                status_url = request.build_absolute_uri(reverse('status'))
+                mypayment.set_urls(
+                    success_url=status_url,
+                    fail_url=status_url, 
+                    cancel_url=status_url, 
+                    ipn_url=status_url
+                    )
+               ###################---------------------##################### 
+                order_qs = Order.objects.filter(User=request.user, ordered=False)
+                order_items = order_qs[0].orderitems.all()
+                order_item_count = order_qs[0].order_items.count()
+                order_total = order_qs[0].order_totals()
+                
+                mypayment.set_product_integration(
+                    total_amount=Decimal(order_total),
+                    currency='BDT',
+                    product_category='clothing', 
+                    product_name='demo-product', 
+                    num_of_item=order_item_count, 
+                    shipping_method='YES', 
+                    product_profile='None')
         else:
             # Form validation failed
             messages.error(request, "Invalid form submission. Please check your inputs.")
@@ -154,3 +185,30 @@ class CheckoutView(View):
             'order': order
         }
         return render(request, 'app_payment/checkout.html', context)
+    
+    
+@csrf_exempt
+def sslc_status(request):
+    if request.method == 'post' or request.method == 'POST':
+        payment_data = request.POST
+        status = payment_data['status']
+        if status == 'VALID':
+            val_id = payment_data['val_id']
+            tran_id = payment_data['tran_id']
+
+            return HttpResponseRedirect(reverse('sslc-complete', kwargs={'val_id': val_id, 'tran_id': tran_id}))
+    return render(request, 'index.html')
+
+def sslc_complete(request, val_id, tran_id):
+    order_qs = Order.objects.filter(user=request.user, ordered=False)
+    order = order_qs[0]
+    order.ordered = True
+    order.order_id = val_id
+    order.payment_id = tran_id
+    order.save()
+    cart_items = Cart.objects.filter(user=request.user, purchased=False)
+    for item in cart_items:
+        item.purchased = True
+        item.save()
+    messages.success(request, "You order was successful")
+    return redirect('home')
