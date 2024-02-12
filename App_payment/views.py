@@ -73,10 +73,14 @@ class CheckoutView(View):
                 address=address,
                 order_note=order_note
             )
+            
+            #now order model shipping address include
             order.shipping_address = billing_address
 
             # Save payment method
-            payment_method = payment_form.cleaned_data.get('payment_option')
+            payment_method = payment_form.cleaned_data.get('payment_option')            
+            #now order model payment address include
+            
             order.payment_option = payment_method
             order.save()  # Save the order after updating shipping address and payment option
 
@@ -123,7 +127,7 @@ class CheckoutView(View):
                         shipping_method='YES',
                         product_profile='None'
                 )
-
+                ################### ---------------------#####################
                 current_user = request.user
                 mypayment.set_customer_info(
                         name=current_user.user_name,
@@ -134,6 +138,7 @@ class CheckoutView(View):
                         country='Bangladesh',
                         phone=phone
                 )
+                ################### ---------------------#####################
                 mypayment.set_shipping_info(
                         shipping_to=current_user.user_name,
                         address=address,
@@ -148,7 +153,7 @@ class CheckoutView(View):
         else:
             # Form validation failed
             messages.error(
-                request, "Invalid form submission. Please check your inputs.")
+                request, "Invalid form submission. Please check your forms inputs.")
 
         context = {
             'form': form,
