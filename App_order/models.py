@@ -47,7 +47,7 @@ class Order(models.Model):
     shipping_address = models.ForeignKey(Checkout, on_delete=models.CASCADE, blank=True, null=True)
     PAYMENT_METHOD = (
         ('Cash On Delivery', 'Cash On Delivery'),
-        ('SSL Commerz', 'SSL Commerz'),
+        ('SSL Commerzs', 'SSL Commerzs'),
     )
     payment_option = models.CharField(choices =PAYMENT_METHOD,max_length=100, blank=True, null=True,)
     

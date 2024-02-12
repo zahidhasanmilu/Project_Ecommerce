@@ -164,5 +164,5 @@ EMAIL_HOST_USER = 'minions.milu889@gmail.com'
 EMAIL_HOST_PASSWORD = 'hoei sqok hlhm mpmm'
 
 
-STORE_ID = 'cleve6084e47685c74'
-STORE_PASS = 'cleve6084e47685c74@ssl'
+STORE_ID = 'minio65c968e273015'
+STORE_PASS = 'minio65c968e273015@ssl'

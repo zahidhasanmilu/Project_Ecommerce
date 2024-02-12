@@ -37,12 +37,12 @@ class CheckoutForm(forms.Form):
         }
     ))
 
-class PaymentMethodForm(forms.ModelForm):
-    PAYMENT_METHOD = (
+
+PAYMENT_METHOD = (
         ('Cash On Delivery', 'Cash On Delivery'),
-        ('SSL Commerz', 'SSL Commerz'),
+        ('SSL Commerzs', 'SSL Commerzs'),
     )
-    
+class PaymentMethodForm(forms.ModelForm):   
     """Form definition for PaymentMethod."""
     payment_option = forms.ChoiceField(choices=PAYMENT_METHOD,
         widget=forms.RadioSelect(attrs={
@@ -52,4 +52,5 @@ class PaymentMethodForm(forms.ModelForm):
     class Meta:
         """Meta definition for PaymentMethodform."""
         model = Order
-        fields = ['payment_option',]
+        fields = ['payment_option']
+ 
