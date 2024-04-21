@@ -150,7 +150,7 @@
                             <div class="product-details-footer">
                                 <div class="product-cat">
                                     <span>Category:</span>
-                                    <a href="#">{{item.category}}</a>,
+                                    <a href="{% url 'category_product' item.category.slug %}">{{item.category.name}}</a>,
 
                                 </div><!-- End .product-cat -->
 

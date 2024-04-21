@@ -173,7 +173,7 @@ def sslc_status(request):
             tran_id = payment_data['tran_id']
 
             return HttpResponseRedirect(reverse('sslc-complete', kwargs={'val_id': val_id, 'tran_id': tran_id}))
-    return render(request, 'index.html')
+    return render(request, 'app_shop/index.html')
 
 
 def sslc_complete(request, val_id, tran_id):
