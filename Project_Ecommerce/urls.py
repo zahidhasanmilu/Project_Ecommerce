@@ -6,12 +6,12 @@ from django.contrib.staticfiles.urls import static, staticfiles_urlpatterns
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin_management/', admin.site.urls),
     path('', include('App_account.urls')),
     path('', include('App_shop.urls')),
     path('', include('App_order.urls')),
     path('', include('App_payment.urls')),
-    
+
     path('accounts/', include('django.contrib.auth.urls')),
 ]
 
