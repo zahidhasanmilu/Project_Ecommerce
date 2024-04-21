@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+Category products
+{% endblock title %}
+
+
+{% block content %}
+<main class="main">
+    <div class="page-header text-center" style="background-image: url('{% static 'assets/images/page-header-bg.jpg' %}')">
+        <div class="container">
+            <h3 class="page-title">{{cate_products.count}} product found from <span><h2 style="color: brown;">{{category.name}}</h2></span></h3>
+        </div><!-- End .container -->
+    </div><!-- End .page-header -->
+
+    <div class="page-content">
+        <div class="categories-page">
+            <div class="container">
+                <div class="row">
+
+               
+                  {% for cat_product in cate_products %}
+                  <div class="col-sm-6 col-md-3 order-md-last">
+                    <div class="banner banner-cat banner-badge">
+                        <a href="{% url 'product_details' cat_product.slug %}">
+                            <img src="{{cat_product.image.url}}" alt="Banner">
+                        </a>
+
+                        <a class="banner-link" href="{% url 'addtocart' cat_product.pk %}">
+                            <h3 class="banner-title">{{cat_product.name}}</h3><!-- End .banner-title -->
+                            <span class="banner-link-text">Add to cart</span>
+                        </a><!-- End .banner-link -->
+                    </div><!-- End .banner -->
+                </div><!-- End .col-md-3 -->
+
+                  {% endfor %}
+                    
+                   
+                </div><!-- End .row -->
+            </div><!-- End .container -->
+        </div><!-- End .categories-page -->
+
+        
+    </div><!-- End .page-content -->
+</main><!-- End .main -->
+{% endblock content %}

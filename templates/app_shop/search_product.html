@@ -1,14 +1,26 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-Search By {{query}} 
+Search By {{query}}
 {% endblock title %}
 
 
 {% block content %}
-  <div class="container">
-    {% for i in product %}
+
+
+<div class="container">
+
+  <div class="page-header text-center" style="background-image: url('{% static 'assets/images/page-header-bg.jpg' %}')">
+
+      <h3 class="page-title">{{product.count}} product found from <span>
+          <h2 style="color: brown;">{{query}}</h2>
+        </span></h3>
+
+  </div><!-- End .page-header -->
+
+
+  {% for i in product %}
   {{forloop.counter}} {{i.name}}
   {% endfor %}
-  </div>
+</div>
 {% endblock content %}

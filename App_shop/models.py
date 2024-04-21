@@ -28,9 +28,8 @@ class Category(models.Model):
         verbose_name_plural = 'Categories'
 
     def save(self, *args, **kwargs):
-        # Generate slug using the product name
-        if not self.slug:
-            self.slug = slugify(self.name)
+        # Generate slug using the product name        
+        self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
 
@@ -49,9 +48,8 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
-        # Generate slug using the product name
-        if not self.slug:
-            self.slug = slugify(self.name)
+        # Generate slug using the product name        
+        self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
     def __str__(self):

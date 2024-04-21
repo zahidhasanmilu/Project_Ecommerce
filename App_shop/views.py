@@ -54,6 +54,16 @@ class ProductDetails(DetailView):
 
         return context
     
+def category_product(request, slug):
+    category = get_object_or_404(Category, slug=slug)
+    cate_products = category.category_product.all()
+    
+    
+    context = {
+        'category':category,
+        'cate_products':cate_products,
+    }
+    return render(request, 'app_shop/category_products.html',context)
 
 # def ProductDetails(request, slug):
 #     product_item = Product.objects.get(slug=slug)
